@@ -1,22 +1,22 @@
 {
-  "name": "library-rollup-template",
+  "name": "vue-router-extend",
   "version": "1.0.0",
-  "description": "library-rollup-template 称为 库构建模板，又称 公共代码构建模板 ，是专门用于构建 公共代码（如：封装的库、工具等） 的 rollup 配置模板，当需要开发和构建公共代码时，直接克隆本项目即可，并默认在的 src 目录下开发即可；",
-  "main": "dist/library-rollup-template.cjs.js",
-  "module": "dist/library-rollup-template.esm.js",
-  "browser": "dist/library-rollup-template.umd.js",
+  "description": "vue-router-extend 对 vue-router 进行了扩展，使其能够传递复杂的数据对象",
+  "main": "dist/vue-router-extend.cjs.js",
+  "module": "dist/vue-router-extend.esm.js",
+  "browser": "dist/vue-router-extend.umd.js",
   "types": "types/index.d.ts",
   "sideEffects": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/GuoBinyong/library-rollup-template"
+    "url": "https://github.com/GuoBinyong/vue-router-extend"
   },
   "keywords": [
-    "前端库",
-    "web库",
-    "library",
-    "rollup 模板",
-    "公共代码"
+    "vue router extend",
+    "路由扩展",
+    "vue",
+    "router",
+    "传参"
   ],
   "author": "郭斌勇",
   "license": "ISC",
