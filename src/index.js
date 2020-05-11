@@ -1,10 +1,14 @@
+import "es-expand"
+import "bom-expand"
+import "vue-exp"
+
 /**
  * 路由数据所处的阶段的标识符常量
  */
 const routeDataPhaseId = {
   send: "send",      // 发送阶段；表示当前路由正在 from 的位置，还未发生跳转；
   receive: "receive",    // 接收阶段；表示当前路由已经跳转到 to 的位置；
-  end: "receive"     // 结束阶段；表示路由数据的传递已经结束；
+  end: "end"     // 结束阶段；表示路由数据的传递已经结束；
 };
 
 
@@ -228,7 +232,7 @@ export default {
         }
       },
 
-      //路由位置判断：开始
+      //路由位置判断：结束
 
 
 

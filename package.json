@@ -35,8 +35,14 @@
     "@babel/preset-env": "^7.9.5",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
-    "es-expand": "^1.0.11",
     "rollup": "^2.7.2",
     "rollup-plugin-babel": "^4.2.0"
+  },
+  "dependencies": {
+    "bom-expand": "^1.0.6",
+    "es-expand": "^1.0.12",
+    "vue": "^2.0.0",
+    "vue-exp": "^1.0.3",
+    "vue-router": "^3.0.0"
   }
 }
