@@ -6,6 +6,20 @@ import pkg from './package.json';
 
 
 /**
+ * convert the name of the package from a divider format to a hump format, and the scope prefix is automatically removed
+ * 把包的名字从分隔线格式转换成驼峰格式，并且会自动去除 scope 前缀
+ *
+ * @param  pkgName : string    name of the package 包的名字
+ * @param separators ?: string | Array<string>   optional; default: ["-","_"] ; separator or separator good array ["-","_"]； 可选；默认值：["-","_"] ；分隔符，或 包含多个分隔符的数组
+ * @returns string  return hump format string  返回驼峰格式的字符串
+ */
+function toHumpFormat(pkgName, separators) {
+	var name = pkgName.replace(/@[^/]+\//,"");
+	return name.toHumpFormat(separators);
+}
+
+
+/**
  * 获取 package.json 中配置的 description、optionalDependencies、peerDependencies 中的所有依赖的名字列表
  * Get an array of dependent names in the configuration of description, optional Dependencies, peer Dependencies configured in package.json
  * @param {*} package  package.json 中的配置对象； Configuration objects in package.json
@@ -14,16 +28,16 @@ import pkg from './package.json';
 function getDependencieNames(packageConf){
 	return Object.keys(Object.assign({},packageConf.dependencies,packageConf.optionalDependencies,packageConf.peerDependencies))
 }
-  
 
-/* 
+
+/*
 注意：
 - rollup 默认翻用的不是 node 的模块解析算法，所以，rollup 找不到由 npm 安装的依赖（模块），所以 由 npm 安装的依赖也不被被要想构建进最终的输出包中；这样也起到了排除 node_modules 中模块的效果；排除模块的功能 由 external 选项指定
 - @rollup/plugin-node-resolve 插件可让 rollup 用 node 的模块解析算法来查找模块；
 */
 
 export default [
-	/* 
+	/*
 	浏览器友好的 UMD 构建
 	特点：
 	   - 将所有依赖都构建在了一起
@@ -32,7 +46,7 @@ export default [
 	{
 		input: 'src/index',
 		output: {
-			name: pkg.name.toHumpFormat(),  //驼峰格式的 pkg.name
+			name: toHumpFormat(pkg.name),  //驼峰格式的 pkg.name
 			file: pkg.browser,
 			format: 'umd'
 		},
@@ -45,7 +59,7 @@ export default [
 		]
 	},
 
-	/* 
+	/*
 	模块友好的构建
 	特点：
 	   - 移除了 node_modules 中的所有依赖
