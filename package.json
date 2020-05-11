@@ -40,7 +40,9 @@
   },
   "dependencies": {
     "bom-expand": "^1.0.6",
-    "es-expand": "^1.0.12",
+    "es-expand": "^1.0.12"
+  },
+  "peerDependencies": {
     "vue": "^2.0.0",
     "vue-exp": "^1.0.3",
     "vue-router": "^3.0.0"

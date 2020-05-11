@@ -45,6 +45,7 @@ export default [
 	*/
 	{
 		input: 'src/index',
+		external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
 		output: {
 			name: toHumpFormat(pkg.name),  //驼峰格式的 pkg.name
 			file: pkg.browser,
