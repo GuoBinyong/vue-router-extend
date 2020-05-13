@@ -1,6 +1,6 @@
 {
   "name": "vue-router-extend",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "vue-router-extend 对 vue-router 进行了扩展，使其能够传递复杂的数据对象",
   "main": "dist/vue-router-extend.cjs.js",
   "module": "dist/vue-router-extend.esm.js",
@@ -44,7 +44,8 @@
     "vue-tls": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.0.0",
-    "vue-router": "^3.0.0"
+    "vue": ">=2.0.0",
+    "vue-router": ">=3.0.0",
+    "vuex": ">=2.0.0"
   }
 }

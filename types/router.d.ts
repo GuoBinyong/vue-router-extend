@@ -1,5 +1,6 @@
 
 import VueRouter,{RawLocation,Location,Route} from "vue-router"
+import {Store} from "vuex"
 
 
 /**
@@ -50,7 +51,7 @@ interface NavInfo {
 declare module "vue-router/types/router" {
 
     interface Location {
-        routeData:any;
+        routeData?:any;
     }
 
 
@@ -78,10 +79,7 @@ declare module "vue-router/types/router" {
 
 
 
-        /*
-        * defaultToKey ，用于存取默认的 toKey
-        * */
-        defaultToKey:string;
+
 
 
 
@@ -126,6 +124,12 @@ declare module "vue-router/types/router" {
 
 
         //路由位置判断：开始
+
+
+        /**
+         * 表示特殊位置的 Location  或 Location 数组
+         */
+        specialLocats?:RawLocation | RawLocation[] | null;
 
 
         /**
@@ -300,6 +304,11 @@ declare module "vue-router/types/router" {
          */
         setRouteData(key:string, routeData:any):void;
 
+        /**
+         * Vuex的 store 的 用于设置 routeData 的 mutation
+         */
+        setRouteDataMutation?:string|null;
+
 
 
 
@@ -314,6 +323,11 @@ declare module "vue-router/types/router" {
          */
         getRouteData(dataKey:string):any;
 
+        /**
+         * 用于从Vuex的 store 中获取 相应 routeDataKey 的 routeData ;
+         */
+        getRouteDataFromStore?:(store:Store<any>,dataKey:string)=>any | null;
+
 
 
 
@@ -325,6 +339,14 @@ declare module "vue-router/types/router" {
          * @return string   routeDataKey
          */
         createRouteDataKey(fromKey?:string, toKey?:string):string;
+
+        //默认的 fromKey
+        defaultFromKey?:string|null;
+
+        /*
+        * defaultToKey ，用于存取默认的 toKey
+        * */
+        defaultToKey?:string|null;
 
 
 
