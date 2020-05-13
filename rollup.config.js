@@ -6,6 +6,16 @@ import pkg from './package.json';
 
 
 /**
+ * Remove the scope prefix for the package name
+ * 去除包名的 scope 前缀
+ *
+ * @param  pkgName : string    name of the package 包的名字
+ * @returns string  Return the name after removing the scope prefix  返回去除 scope 前缀后的名字
+ */
+function removeScope(pkgName) {return pkgName.replace(/@[^/]+\//,"")}
+
+
+/**
  * convert the name of the package from a divider format to a hump format, and the scope prefix is automatically removed
  * 把包的名字从分隔线格式转换成驼峰格式，并且会自动去除 scope 前缀
  *
@@ -13,10 +23,7 @@ import pkg from './package.json';
  * @param separators ?: string | Array<string>   optional; default: ["-","_"] ; separator or separator good array ["-","_"]； 可选；默认值：["-","_"] ；分隔符，或 包含多个分隔符的数组
  * @returns string  return hump format string  返回驼峰格式的字符串
  */
-function toHumpFormat(pkgName, separators) {
-	var name = pkgName.replace(/@[^/]+\//,"");
-	return name.toHumpFormat(separators);
-}
+function toHumpFormat(pkgName, separators) {return removeScope(pkgName).toHumpFormat(separators)}
 
 
 /**
@@ -45,14 +52,29 @@ export default [
 	*/
 	{
 		input: 'src/index',
-		external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
+		// external: getDependencieNames(pkg),  //移除 package.json 中所有的依赖包
 		output: {
-			name: toHumpFormat(pkg.name),  //驼峰格式的 pkg.name
-			file: pkg.browser,
+			name: "VueRouterExtend",  //驼峰格式的 pkg.name
+			// 如果 pkg.browser 是字符串类型，则 file 为 pkg.browser，否则为 `<包名>.umd.js`
+			file: typeof pkg.browser === "string" ? pkg.browser : `dist/${removeScope(pkg.name)}.umd.js`,
 			format: 'umd'
 		},
 		plugins: [
-			resolve(), // 使用node解析算法查找模块
+			// 使用node解析算法查找模块
+			resolve({
+				/*
+				browser   类型: Boolean   默认值: false
+				是否优先使用 `package.json` 中的 browser 字段来解析依赖包的入口文件；
+				- 构建专门用于浏览器环境的包时，建义设置为 `browser:true`；
+				- 构建专门用于node环境的包时，建义设置为 `browser:false` 或者 删除此选项；
+				*/
+				browser:true,
+				/*
+				extensions   类型: Array[...String]    默认值: ['.mjs', '.js', '.json', '.node']
+				扩展文件名
+				*/
+				// extensions:['.mjs', '.js', '.json', '.node']
+			}),
 			commonjs(), // 将依赖的模块从 CommonJS 模块规范转换成 ES2015 模块规范
 			babel({
 				exclude: ['node_modules/**']

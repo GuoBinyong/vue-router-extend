@@ -1,6 +1,6 @@
 import "es-expand"
 import "bom-expand"
-import "vue-exp"
+import {includeAllWihtArray_MergeStrategy} from "vue-tls"
 
 /**
  * 路由数据所处的阶段的标识符常量
@@ -936,11 +936,10 @@ export default {
 
 
     //配置合并策略：开始
-    let includeAllWihtArray = Vue.byMergeStrategies.includeAllWihtArray ;
     Object.assign(Vue.config.optionMergeStrategies,{
-      beforeRouteEnter:includeAllWihtArray,
-      beforeRouteUpdate:includeAllWihtArray,
-      beforeRouteLeave:includeAllWihtArray
+      beforeRouteEnter:includeAllWihtArray_MergeStrategy,
+      beforeRouteUpdate:includeAllWihtArray_MergeStrategy,
+      beforeRouteLeave:includeAllWihtArray_MergeStrategy
     });
     //配置合并策略：结束
 
