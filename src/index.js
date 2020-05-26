@@ -402,7 +402,7 @@ export default {
      * @returns {*}
      */
     VueRouter.prototype.locatStringToObject = function (locatStr) {
-      return JSON.isJSONString(locatStr) ? JSON.parse(locatStr) : {path: locatStr};;
+      return JSON.isJSONString(locatStr) ? JSON.parse(locatStr) : {path: locatStr};
     }
 
 
