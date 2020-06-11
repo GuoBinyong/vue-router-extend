@@ -1,6 +1,6 @@
-import "es-expand"
 import "bom-expand"
 import {includeAllWihtArray_MergeStrategy} from "vue-tls"
+import {safelyParse,correctParse} from "json-tls"
 
 /**
  * 路由数据所处的阶段的标识符常量
@@ -402,7 +402,8 @@ export default {
      * @returns {*}
      */
     VueRouter.prototype.locatStringToObject = function (locatStr) {
-      return JSON.isJSONString(locatStr) ? JSON.parse(locatStr) : {path: locatStr};
+      let parseInfo = safelyParse(locatStr);
+      return parseInfo.parsed ? parseInfo.result : {path: locatStr};
     }
 
 
@@ -454,7 +455,7 @@ export default {
     VueRouter.prototype.parseRouteParamValueOfRoute = function (routeParamValue) {
       let parseResult = routeParamValue;
 
-      if (typeof routeParamValue == "object" || typeof routeParamValue == "function") {
+      if (typeof routeParamValue === "object" || typeof routeParamValue === "function") {
         throw "路由中不能传递对象类型的参数，如果你需要传，可以用 JSON.stringify 将对象转换成字符串！"
       } else {
         parseResult = this.locatStringToObject(routeParamValue);
@@ -475,7 +476,7 @@ export default {
       if (typeof ObjectParamValue == "object" || typeof ObjectParamValue == "function") {
         throw "路由中不能传递对象类型的参数，如果你需要传，可以用 JSON.stringify 将对象转换成字符串！"
       } else {
-        parseResult = JSON.correctParse(ObjectParamValue);
+        parseResult = correctParse(ObjectParamValue);
       }
 
       return parseResult;
