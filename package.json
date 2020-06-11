@@ -3,9 +3,10 @@
   "version": "1.0.6",
   "description": "vue-router-extend 对 vue-router 进行了扩展，使其能够传递复杂的数据对象",
   "main": "dist/vue-router-extend.cjs.js",
-  "module": "dist/vue-router-extend.esm.js",
+  "module": "dist/vue-router-extend.es.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
+  "homepage": "https://github.com/GuoBinyong/vue-router-extend#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/GuoBinyong/vue-router-extend"
@@ -38,12 +39,13 @@
     "@rollup/plugin-node-resolve": "^7.1.3",
     "eslint": "^7.0.0",
     "package-tls": "^1.0.2",
-    "rollup": "^2.7.2"
+    "rollup": "^2.7.2",
+    "rollup-plugin-terser": "^6.1.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
-    "bom-expand": "^1.0.11",
-    "es-expand": "^1.0.16",
+    "bom-expand": "^1.0.12",
+    "json-tls": "^1.1.0",
     "vue-tls": "^1.0.3"
   },
   "peerDependencies": {
